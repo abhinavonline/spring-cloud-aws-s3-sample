@@ -1,0 +1,26 @@
+= Spring Cloud AWS S3 Sample Application
+
+This application uses https://cloud.spring.io/spring-cloud-aws/reference/html/#using-amazon-web-services[Spring Cloud for Amazon Web Services] to upload and download files from AWS S3 bucket.
+As of release 2.0.0.M2 Spring Cloud AWS does not support https://aws.amazon.com/blogs/developer/data-encryption-with-amazon-s3/[Server-side data encryption] with Amazon S3.
+
+With Server-side data encryption as soon as your data reaches S3, it is encrypted and stored.
+The keys used for encryption are managed by Amazon.
+When you request your data again, Amazon S3 decrypts it as it’s streamed back to you.
+
+This sample application overcomes this Spring Cloud AWS limitation by using pre-configured AmazonS3 client bean to set the server-side encryption flag when uploading data.
+
+=  Configuration
+
+application.properties in resources folder has AWS S3 bucket configuration properties and location of source/destination folders to upload and download files to and from AWS S3 respectively.
+
+= Build
+$ mvn clean package spring-boot:repackage
+
+= Run
+$ java -jar target/spring-cloud-aws-s3-sample-1.0-SNAPSHOT.jar
+
+To upload files from a source directory to your S3 bucket launch on browser
+http://localhost:8080/upload
+
+To download files from your S3 bucket launch on browser window
+http://localhost:8080/download
